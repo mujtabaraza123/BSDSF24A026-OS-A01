@@ -32,3 +32,19 @@ static: $(STATIC_TARGET)
 
 $(STATIC_TARGET): obj/main.o $(STATIC_LIB)
 	gcc obj/main.o -Llib -lmyutils -o $(STATIC_TARGET)
+DYNAMIC_LIB = lib/libmyutils.so
+DYNAMIC_TARGET = bin/client_dynamic
+
+$(DYNAMIC_LIB): obj/mystrfunctions_pic.o obj/myfilefunctions_pic.o
+	gcc -shared -o $(DYNAMIC_LIB) obj/mystrfunctions_pic.o obj/myfilefunctions_pic.o
+
+dynamic: $(DYNAMIC_TARGET)
+
+$(DYNAMIC_TARGET): obj/main.o $(DYNAMIC_LIB)
+	gcc obj/main.o -Llib -lmyutils -o $(DYNAMIC_TARGET)
+
+obj/mystrfunctions_pic.o: src/mystrfunctions.c
+	gcc -fPIC -Iinclude -c src/mystrfunctions.c -o obj/mystrfunctions_pic.o
+
+obj/myfilefunctions_pic.o: src/myfilefunctions.c
+	gcc -fPIC -Iinclude -c src/myfilefunctions.c -o obj/myfilefunctions_pic.o
