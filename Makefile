@@ -22,3 +22,13 @@ obj/myfilefunctions.o: src/myfilefunctions.c
 
 clean:
 	rm -f obj/*.o bin/client
+STATIC_LIB = lib/libmyutils.a
+STATIC_TARGET = bin/client_static
+
+$(STATIC_LIB): obj/mystrfunctions.o obj/myfilefunctions.o
+	ar rcs $(STATIC_LIB) obj/mystrfunctions.o obj/myfilefunctions.o
+
+static: $(STATIC_TARGET)
+
+$(STATIC_TARGET): obj/main.o $(STATIC_LIB)
+	gcc obj/main.o -Llib -lmyutils -o $(STATIC_TARGET)
