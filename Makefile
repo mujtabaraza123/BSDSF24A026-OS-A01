@@ -48,3 +48,9 @@ obj/mystrfunctions_pic.o: src/mystrfunctions.c
 
 obj/myfilefunctions_pic.o: src/myfilefunctions.c
 	gcc -fPIC -Iinclude -c src/myfilefunctions.c -o obj/myfilefunctions_pic.o
+install:
+	mkdir -p /usr/local/lib
+	cp lib/libmyutils.so /usr/local/lib/
+	mkdir -p /usr/local/share/man/man3
+	cp man/man3/*.3 /usr/local/share/man/man3/
+	ldconfig

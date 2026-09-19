@@ -1,0 +1,18 @@
+.TH MYSTRCAT 3 "September 2026" "libmyutils" "Library Functions"
+.SH NAME
+mystrcat \- concatenate one string to another
+.SH SYNOPSIS
+.B #include "../include/mystrfunctions.h"
+.PP
+.B int mystrcat(char *dest, const char *src);
+.SH DESCRIPTION
+.B mystrcat
+appends the string
+.BR src
+to the end of the destination string
+.BR dest .
+The resulting string is terminated with a null character.
+.SH RETURN VALUE
+Returns the length of the resulting string.
+.SH AUTHOR
+Mujtaba Raza
